@@ -90,3 +90,4 @@ typings/
 .dynamodb/
 
 /auth.json
+/config.json
