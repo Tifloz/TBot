@@ -1,5 +1,5 @@
 var request = require("request");
-var AuthDetails = require("../../auth.json");
+var AuthDetails = require("../../config/auth.json");
 try {
 	var yt = require("./youtube_plugin");
 	var youtube_plugin = new yt();

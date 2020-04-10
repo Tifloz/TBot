@@ -1,5 +1,5 @@
 var request = require("request");
-var AuthDetails = require("../../auth.json");
+var AuthDetails = require("../../config/auth.json");
 var Discord = require("discord.js");
 
 exports.commands = [

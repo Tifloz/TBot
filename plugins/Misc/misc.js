@@ -1,3 +1,6 @@
+var Nightmare = require('nightmare');
+var nightmare = Nightmare({ show: true });
+
 exports.commands = [
 	"mixer",
 	"chuckNorris",
@@ -42,10 +45,16 @@ exports.watchtogether = {
 	usage: "[video url (Youtube, Vimeo)",
 	description: "Generate a watch2gether room with your video to watch with your friends!",
 	process: function(bot,msg,suffix){
-		var watch2getherUrl = "https://www.watch2gether.com/go#";
-		msg.channel.send(
-			"watch2gether link").then(function(){
-				msg.channel.send(watch2getherUrl + suffix)
-		})
+		const Nightmare = require('nightmare');
+		const nightmare = Nightmare();
+		nightmare
+			.goto("https://www.watch2gether.com")
+			.click('#create_room_button')
+			.wait(1000)
+			.url()
+			.end()
+			.then(url => {
+				msg.channel.send(url);
+			});
 	}
 }

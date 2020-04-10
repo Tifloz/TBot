@@ -277,12 +277,12 @@ var hooks = {
 }
 
 bot.on("ready", function () {
-    console.log("Logged in! Currently serving " + bot.guilds.array().length + " servers.");
+    console.log("Logged in! Currently serving " + bot.guilds.cache.array().length + " servers.");
     require("./plugins.js").init(hooks);
     console.log("Type " + Config.commandPrefix + "help on Discord for a command list.");
     bot.user.setPresence({
         game: {
-            name: Config.commandPrefix + "help | " + bot.guilds.array().length + " Servers"
+            name: Config.commandPrefix + "help | " + bot.guilds.cache.array().length + " Servers"
         }
     });
 });
@@ -300,7 +300,7 @@ function checkMessageForCommand(msg, isEdit) {
         console.log("treating " + msg.content + " from " + msg.author + " as command");
         var cmdTxt = msg.content.split(" ")[0].substring(Config.commandPrefix.length);
         var suffix = msg.content.substring(cmdTxt.length + Config.commandPrefix.length + 1);//add one for the ! and one for the space
-        if (msg.isMentioned(bot.user)) {
+        if (msg.mentions.has(bot.user)) {
             try {
                 cmdTxt = msg.content.split(" ")[1];
                 suffix = msg.content.substring(bot.user.mention().length + cmdTxt.length + Config.commandPrefix.length + 1);
@@ -392,7 +392,7 @@ function checkMessageForCommand(msg, isEdit) {
             }
             return true;
         } else {
-            msg.channel.send(cmdTxt + " is not not recognized as a command!").then((message => message.delete(5000)))
+            msg.channel.send(cmdTxt + " is not not recognized as a command!").then((message => message.delete({ timeout: 5000})))
             return true;
         }
     } else {
@@ -402,7 +402,7 @@ function checkMessageForCommand(msg, isEdit) {
             return true; //returning true to prevent feedback from commands
         }
 
-        if (msg.author != bot.user && msg.isMentioned(bot.user)) {
+        if (msg.author != bot.user && msg.mentions.has(bot.user)) {
             //msg.channel.send("yes?"); //using a mention here can lead to looping
         } else {
 

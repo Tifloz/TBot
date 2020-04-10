@@ -1,5 +1,5 @@
 
-var AuthDetails = require("../../auth.json");
+var AuthDetails = require("../../config/auth.json");
 
 exports.commands = [
 	"stock"

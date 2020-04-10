@@ -1,5 +1,5 @@
 var Wolfram = require('node-wolfram');
-var AuthDetails = require("../../auth.json");
+var AuthDetails = require("../../config/auth.json");
 
 function WolframPlugin () {
 	this.wolfram = new Wolfram(AuthDetails.wolfram_api_key)

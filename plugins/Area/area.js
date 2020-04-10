@@ -6,7 +6,7 @@ exports.clear = {
     usage: "<message>",
     description: "What can you say about area ?",
     process: function (bot, msg, suffix) {
-        if (!msg.channel.permissionsFor(msg.author).hasPermission("MANAGE_MESSAGES")) {
+        if (!msg.channel.permissionsFor(msg.member).has("MANAGE_MESSAGES",false)) {
             msg.channel.send("Sorry, you don't have the permission to execute the command \"" + msg.content + "\"");
             console.log("Sorry, you don't have the permission to execute the command \"" + msg.content + "\"");
             return;
@@ -16,7 +16,7 @@ exports.clear = {
             return;
         }
         if (msg.channel.type == 'text') {
-            msg.channel.fetchMessages()
+            msg.channel.messages.fetch({limit: 100})
                 .then(msgs => {
                     msg.channel.bulkDelete(msgs);
                     let msgsDeleted = msgs.array().length; // number of msgs deleted
@@ -29,6 +29,5 @@ exports.clear = {
                     console.log(err);
                 });
         }
-        msg.delete(3000);
     }
 }

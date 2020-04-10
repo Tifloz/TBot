@@ -2,6 +2,6 @@
   "main": "google.js",
   "dependencies": {
     "request": ">=2.58.0",
-	"youtube-node": "1.2.x"
+    "youtube-node": "1.2.x"
   }
 }

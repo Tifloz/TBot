@@ -89,5 +89,6 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-/auth.json
+config/
+.idea/
 /config.json
